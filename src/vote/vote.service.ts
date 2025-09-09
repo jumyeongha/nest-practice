@@ -1,0 +1,28 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Vote } from './vote';
+import { VoteRepository } from './vote.repository';
+import { VoteStatus } from './vote.status';
+import { PageResult } from '../common/page.result';
+
+@Injectable()
+export class VoteService {
+  constructor(private readonly voteRepository: VoteRepository) {}
+
+  async getVote(id: number): Promise<Vote> {
+    const vote: Vote | null = await this.voteRepository.findById(id);
+
+    if (!vote) {
+      throw new NotFoundException('투표가 존재하지 않습니다.');
+    }
+
+    return vote;
+  }
+
+  async getVotes(
+    page: number,
+    size: number,
+    staus: VoteStatus,
+  ): Promise<PageResult<Vote>> {
+    return await this.voteRepository.findManyBy(page, size, staus);
+  }
+}

@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model UserEntity {
+  id  Int  @default(autoincrement()) @id
+  email  String  @db.VarChar(255)
+  password String @db.VarChar(255)
+  name String @db.VarChar(255)
+
+  @@map("user")
+}
+
+model StarEntity {
+  id  Int  @default(autoincrement()) @id
+  name  String @db.VarChar(32)
+
+  @@map("star")
+}
+
+model VoteEntity {
+  id  Int  @default(autoincrement()) @id
+  title String @db.VarChar(64) @map("title")
+  status String @db.VarChar(16) @map("status")
+  startAt  DateTime  @map("start_at")
+  endAt  DateTime  @map("end_at")
+
+  @@map("vote")
+}
+
+model CandidateEntity {
+  id  Int  @default(autoincrement()) @id
+  voteId  Int  @map("vote_id")
+  starId  Int  @map("star_id")
+  voteCount  Int  @map("vote_count")
+  startAt  DateTime  @map("start_at")
+  endAt  DateTime  @map("end_at")
+
+  @@map("candidate")
+}
+
+model VotingLogEntity {
+  id  Int  @default(autoincrement()) @id
+  voteId  Int  @map("vote_id")
+  candidateId  Int  @map("candidate_id")
+  userId Int  @map("user_id")
+  voteAt  DateTime  @map("vote_at")
+
+  @@map("voting_log")
+}
