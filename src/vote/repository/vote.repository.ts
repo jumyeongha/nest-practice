@@ -1,9 +1,9 @@
-import { Vote } from './vote';
-import { PrismaService } from '../infra/db/prisma/prisma.service';
+import { Vote } from '../domain/vote';
+import { PrismaService } from '../../infra/db/prisma/prisma.service';
 import { VoteEntity } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-import { toVoteStatus, VoteStatus } from './vote.status';
-import { PageResult } from '../common/page.result';
+import { toVoteStatus, VoteStatus } from '../domain/vote.status';
+import { PageResult } from '../../common/page.result';
 
 @Injectable()
 export class VoteRepository {

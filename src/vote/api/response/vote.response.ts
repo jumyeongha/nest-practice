@@ -1,6 +1,6 @@
-import { Vote } from '../vote';
+import { Vote } from '../../domain/vote';
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
-import { VoteStatus } from '../vote.status';
+import { VoteStatus } from '../../domain/vote.status';
 
 @ApiSchema({
   name: '[투표 상세 조회 응답 DTO]',

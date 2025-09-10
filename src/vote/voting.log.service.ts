@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { VotingLogRepository } from './voting.log.repository';
-import { VotingLog } from './voting.log';
-import { Vote } from './vote';
-import { VoteRepository } from './vote.repository';
-import { CandidateRepository } from './candidate.repository';
-import { Candidate } from './candidate';
+import { VotingLogRepository } from './repository/voting.log.repository';
+import { VotingLog } from './domain/voting.log';
+import { Vote } from './domain/vote';
+import { VoteRepository } from './repository/vote.repository';
+import { CandidateRepository } from './repository/candidate.repository';
+import { Candidate } from './domain/candidate';
 
 @Injectable()
 export class VotingLogService {

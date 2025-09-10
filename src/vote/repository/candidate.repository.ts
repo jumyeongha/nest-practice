@@ -1,8 +1,7 @@
-import { Candidate } from './candidate';
-import { PrismaService } from '../infra/db/prisma/prisma.service';
+import { Candidate } from '../domain/candidate';
+import { PrismaService } from '../../infra/db/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CandidateEntity, StarEntity } from '@prisma/client';
-import { contains } from 'class-validator';
 
 @Injectable()
 export class CandidateRepository {
@@ -84,7 +83,6 @@ export class CandidateRepository {
   }
 
   async search(voteId: number, keyword: string): Promise<Candidate[]> {
-
     const candidateWithStar = await this.prisma.candidateEntity.findMany({
       where: {
         voteId: voteId,

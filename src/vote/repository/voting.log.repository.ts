@@ -1,5 +1,5 @@
-import { PrismaService } from '../infra/db/prisma/prisma.service';
-import { VotingLog } from './voting.log';
+import { PrismaService } from '../../infra/db/prisma/prisma.service';
+import { VotingLog } from '../domain/voting.log';
 import { Injectable } from '@nestjs/common';
 import { VotingLogEntity } from '@prisma/client';
 

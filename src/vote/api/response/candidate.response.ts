@@ -1,4 +1,4 @@
-import { Candidate } from '../candidate';
+import { Candidate } from '../../domain/candidate';
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
 
 @ApiSchema({

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Vote } from './vote';
-import { VoteRepository } from './vote.repository';
-import { VoteStatus } from './vote.status';
+import { Vote } from './domain/vote';
+import { VoteRepository } from './repository/vote.repository';
+import { VoteStatus } from './domain/vote.status';
 import { PageResult } from '../common/page.result';
 
 @Injectable()

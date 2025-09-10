@@ -1,4 +1,4 @@
-import { VoteStatus } from '../vote.status';
+import { VoteStatus } from '../../domain/vote.status';
 import { IsEnum, IsInt, Max, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';

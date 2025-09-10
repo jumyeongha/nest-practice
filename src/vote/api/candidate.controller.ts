@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { CandidateService } from '../candidate.service';
-import { Candidate } from '../candidate';
+import { Candidate } from '../domain/candidate';
 import {
   ApiOperation,
   ApiParam,
@@ -8,7 +8,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CandidateListResponse } from './candidate.list.response';
+import { CandidateListResponse } from './response/candidate.list.response';
 
 @ApiTags('[투표 후보자]')
 @Controller('api/votes')
