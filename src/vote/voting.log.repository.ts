@@ -14,7 +14,7 @@ export class VotingLogRepository {
           voteId: votingLog.voteId,
           candidateId: votingLog.candidateId,
           userId: votingLog.userId,
-          voteAt: votingLog.voteAt,
+          votedAt: votingLog.votedAt,
         },
       });
 
@@ -23,7 +23,7 @@ export class VotingLogRepository {
       votingLogEntity.voteId,
       votingLogEntity.candidateId,
       votingLogEntity.userId,
-      votingLogEntity.voteAt,
+      votingLogEntity.votedAt,
     );
   }
 }

@@ -4,7 +4,7 @@ export class VotingLog {
     private _voteId: number,
     private _candidateId: number,
     private _userId: number,
-    private _voteAt: Date,
+    private _votedAt: Date,
   ) {}
 
   static create(
@@ -12,9 +12,9 @@ export class VotingLog {
     voteId: number,
     candidateId: number,
     userId: number,
-    voteAt: Date,
+    votedAt: Date,
   ): VotingLog {
-    return new VotingLog(id, voteId, candidateId, userId, voteAt);
+    return new VotingLog(id, voteId, candidateId, userId, votedAt);
   }
 
   get id(): number | null {
@@ -33,7 +33,7 @@ export class VotingLog {
     return this._userId;
   }
 
-  get voteAt(): Date {
-    return this._voteAt;
+  get votedAt(): Date {
+    return this._votedAt;
   }
 }
