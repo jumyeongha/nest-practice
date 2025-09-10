@@ -20,6 +20,8 @@ model StarEntity {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(32)
 
+  candidateEntities CandidateEntity[]
+
   @@map("star")
 }
 
@@ -40,6 +42,8 @@ model CandidateEntity {
   voteCount Int      @map("vote_count")
   startedAt   DateTime @map("started_at")
   endedAt     DateTime @map("ended_at")
+
+  starEntity StarEntity @relation(fields: [starId], references: [id])
 
   @@map("candidate")
 }

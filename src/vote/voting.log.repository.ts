@@ -1,7 +1,7 @@
 import { PrismaService } from '../infra/db/prisma/prisma.service';
 import { VotingLog } from './voting.log';
-import { VotingLogEntity } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
+import { VotingLogEntity } from '@prisma/client';
 
 @Injectable()
 export class VotingLogRepository {
