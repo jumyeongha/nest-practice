@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import expressBasicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,14 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
+    }),
+  );
+
+  app.use(
+    ['/api-docs', '/api-docs-json'],
+    expressBasicAuth({
+      challenge: true,
+      users: { [process.env.SWAGGER_USER!]: process.env.SWAGGER_PASSWORD! },
     }),
   );
 
