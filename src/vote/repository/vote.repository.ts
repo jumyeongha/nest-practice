@@ -4,6 +4,7 @@ import { VoteEntity } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { toVoteStatus, VoteStatus } from '../domain/vote.status';
 import { PageResult } from '../../common/page.result';
+import { VoteCreateRequest } from '../api/request/vote.create.request';
 
 @Injectable()
 export class VoteRepository {
@@ -59,5 +60,16 @@ export class VoteRepository {
     );
 
     return PageResult.of<Vote>(votes, page, size, total);
+  }
+
+  save(request: VoteCreateRequest): Promise<VoteEntity> {
+    return this.prisma.voteEntity.create({
+      data: {
+        title: request.title,
+        status: VoteStatus.ACTIVE,
+        startedAt: request.startedAt,
+        endedAt: request.endedAt,
+      },
+    });
   }
 }
