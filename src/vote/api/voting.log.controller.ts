@@ -1,6 +1,6 @@
 import { Body, Controller, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { VotingLogService } from '../voting.log.service';
-import { VotingLogCreateRequest } from './voting.log.create.request';
+import { VotingLogCreateRequest } from './request/voting.log.create.request';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[투표 기록]')

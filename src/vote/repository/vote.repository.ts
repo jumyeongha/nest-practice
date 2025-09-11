@@ -1,9 +1,9 @@
-import { Vote } from './vote';
-import { PrismaService } from '../infra/db/prisma/prisma.service';
+import { Vote } from '../domain/vote';
+import { PrismaService } from '../../infra/db/prisma/prisma.service';
 import { VoteEntity } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-import { toVoteStatus, VoteStatus } from './vote.status';
-import { PageResult } from '../common/page.result';
+import { toVoteStatus, VoteStatus } from '../domain/vote.status';
+import { PageResult } from '../../common/page.result';
 
 @Injectable()
 export class VoteRepository {
@@ -21,8 +21,8 @@ export class VoteRepository {
     return Vote.create(
       voteEntity.id,
       voteEntity.title,
-      voteEntity.startAt,
-      voteEntity.endAt,
+      voteEntity.startedAt,
+      voteEntity.endedAt,
       toVoteStatus(voteEntity.status),
     );
   }
@@ -40,7 +40,7 @@ export class VoteRepository {
       skip: (page - 1) * size,
       take: size,
       orderBy: {
-        endAt: 'asc',
+        endedAt: 'asc',
       },
     });
 
@@ -49,7 +49,13 @@ export class VoteRepository {
     });
 
     const votes: Vote[] = voteEntities.map((e) =>
-      Vote.create(e.id, e.title, e.startAt, e.endAt, toVoteStatus(e.status)),
+      Vote.create(
+        e.id,
+        e.title,
+        e.startedAt,
+        e.endedAt,
+        toVoteStatus(e.status),
+      ),
     );
 
     return PageResult.of<Vote>(votes, page, size, total);

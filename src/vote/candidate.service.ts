@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Candidate } from './candidate';
-import { CandidateRepository } from './candidate.repository';
+import { Candidate } from './domain/candidate';
+import { CandidateRepository } from './repository/candidate.repository';
 
 @Injectable()
 export class CandidateService {

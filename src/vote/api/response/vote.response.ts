@@ -1,6 +1,6 @@
-import { Vote } from '../vote';
+import { Vote } from '../../domain/vote';
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
-import { VoteStatus } from '../vote.status';
+import { VoteStatus } from '../../domain/vote.status';
 
 @ApiSchema({
   name: '[투표 상세 조회 응답 DTO]',
@@ -23,26 +23,26 @@ export class VoteResponse {
     example: '2025-09-08T12:00:00.000Z',
     description: '시작 시간',
   })
-  readonly startAt: Date;
+  readonly startedAt: Date;
 
   @ApiProperty({
     example: '2025-09-08T15:00:00.000Z',
     description: '종료 시간',
   })
-  readonly endAt: Date;
+  readonly endedAt: Date;
 
   constructor(
     id: number | null,
     title: string,
     status: VoteStatus,
-    startAt: Date,
-    endAt: Date,
+    startedAt: Date,
+    endedAt: Date,
   ) {
     this.id = id;
     this.title = title;
     this.status = status;
-    this.startAt = startAt;
-    this.endAt = endAt;
+    this.startedAt = startedAt;
+    this.endedAt = endedAt;
   }
 
   static from(vote: Vote): VoteResponse {
@@ -50,8 +50,8 @@ export class VoteResponse {
       vote.id,
       vote.title,
       vote.status,
-      vote.startAt,
-      vote.endAt,
+      vote.startedAt,
+      vote.endedAt,
     );
   }
 }

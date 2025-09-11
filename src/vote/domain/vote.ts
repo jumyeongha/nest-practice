@@ -5,18 +5,18 @@ export class Vote {
     private _id: null | number,
     private _title: string,
     private _status: VoteStatus,
-    private _startAt: Date,
-    private _endAt: Date,
+    private _startedAt: Date,
+    private _endedAt: Date,
   ) {}
 
   static create(
     id: null | number,
     title: string,
-    startAt: Date,
-    endAt: Date,
+    startedAt: Date,
+    endedAt: Date,
     status: VoteStatus,
   ): Vote {
-    return new Vote(id, title, status, startAt, endAt);
+    return new Vote(id, title, status, startedAt, endedAt);
   }
 
   get id(): number | null {
@@ -27,12 +27,12 @@ export class Vote {
     return this._title;
   }
 
-  get startAt(): Date {
-    return this._startAt;
+  get startedAt(): Date {
+    return this._startedAt;
   }
 
-  get endAt(): Date {
-    return this._endAt;
+  get endedAt(): Date {
+    return this._endedAt;
   }
 
   get status(): VoteStatus {

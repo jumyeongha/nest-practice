@@ -1,7 +1,7 @@
-import { Candidate } from './candidate';
-import { PrismaService } from '../infra/db/prisma/prisma.service';
-import { CandidateEntity, StarEntity } from '@prisma/client';
+import { Candidate } from '../domain/candidate';
+import { PrismaService } from '../../infra/db/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { CandidateEntity, StarEntity } from '@prisma/client';
 
 @Injectable()
 export class CandidateRepository {
@@ -83,32 +83,20 @@ export class CandidateRepository {
   }
 
   async search(voteId: number, keyword: string): Promise<Candidate[]> {
-    const like: string = `%${(keyword ?? '').trim()}%`;
-    const candidateWithStarNames: CandidateWithStarName[] = await this.prisma
-      .$queryRaw<CandidateWithStarName[]>`
-      SELECT
-        c.id AS id,
-        c.vote_id AS voteId,
-        c.star_id AS starId,
-        s.name AS starName,
-        c.vote_count AS voteCount
-    FROM candidate AS c
-    JOIN star AS s ON c.star_id = s.id
-    WHERE c.vote_id = ${voteId}
-    AND s.name LIKE ${like}
-    ORDER BY c.vote_count DESC
-    `;
+    const candidateWithStar = await this.prisma.candidateEntity.findMany({
+      where: {
+        voteId: voteId,
+        starEntity: {
+          is: {
+            name: { contains: keyword },
+          },
+        },
+      },
+      include: { starEntity: { select: { name: true } } },
+    });
 
-    return candidateWithStarNames.map((c) =>
-      Candidate.create(c.id, c.starId, c.starName, c.voteCount),
+    return candidateWithStar.map((c) =>
+      Candidate.create(c.id, c.starId, c.starEntity.name, c.voteCount),
     );
   }
-}
-
-interface CandidateWithStarName {
-  id: number;
-  voteId: number;
-  starId: number;
-  starName: string;
-  voteCount: number;
 }

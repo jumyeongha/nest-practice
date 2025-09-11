@@ -1,7 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { VoteService } from '../vote.service';
-import { VoteResponse } from './vote.response';
-import { Vote } from '../vote';
+import { VoteResponse } from './response/vote.response';
+import { Vote } from '../domain/vote';
 import {
   ApiExtraModels,
   ApiOperation,
@@ -10,7 +10,7 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { VoteListRequest } from './vote.list.request';
+import { VoteListRequest } from './request/vote.list.request';
 import { PageResult } from '../../common/page.result';
 import { PageResponse } from '../../common/page.response';
 

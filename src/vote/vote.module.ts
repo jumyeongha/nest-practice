@@ -2,21 +2,21 @@ import { Module } from '@nestjs/common';
 import { VoteController } from './api/vote.controller';
 import { VoteService } from './vote.service';
 import { PersistentModule } from '../infra/db/persistent.module';
-import { CandidateService } from './candidate.service';
+import { VoteRepository } from './repository/vote.repository';
 import { CandidateController } from './api/candidate.controller';
-import { CandidateRepository } from './candidate.repository';
-import { VoteRepository } from './vote.repository';
-import { VotingLogService } from './voting.log.service';
-import { VotingLogRepository } from './voting.log.repository';
 import { VotingLogController } from './api/voting.log.controller';
+import { CandidateService } from './candidate.service';
+import { CandidateRepository } from './repository/candidate.repository';
+import { VotingLogService } from './voting.log.service';
+import { VotingLogRepository } from './repository/voting.log.repository';
 
 @Module({
   imports: [PersistentModule],
   controllers: [VoteController, CandidateController, VotingLogController],
   providers: [
     VoteService,
-    CandidateService,
     VoteRepository,
+    CandidateService,
     CandidateRepository,
     VotingLogService,
     VotingLogRepository,

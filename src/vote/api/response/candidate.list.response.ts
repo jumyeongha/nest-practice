@@ -1,5 +1,5 @@
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
-import { Candidate } from '../candidate';
+import { Candidate } from '../../domain/candidate';
 import { CandidateResponse } from './candidate.response';
 
 @ApiSchema({
