@@ -26,9 +26,9 @@ model StarEntity {
 }
 
 model VoteEntity {
-  id      Int      @id @default(autoincrement())
-  title   String   @map("title") @db.VarChar(64)
-  status  String   @map("status") @db.VarChar(16)
+  id        Int      @id @default(autoincrement())
+  title     String   @map("title") @db.VarChar(64)
+  status    String   @map("status") @db.VarChar(16)
   startedAt DateTime @map("started_at")
   endedAt   DateTime @map("ended_at")
 
@@ -40,8 +40,8 @@ model CandidateEntity {
   voteId    Int      @map("vote_id")
   starId    Int      @map("star_id")
   voteCount Int      @map("vote_count")
-  startedAt   DateTime @map("started_at")
-  endedAt     DateTime @map("ended_at")
+  startedAt DateTime @map("started_at")
+  endedAt   DateTime @map("ended_at")
 
   starEntity StarEntity @relation(fields: [starId], references: [id])
 
@@ -53,7 +53,7 @@ model VotingLogEntity {
   voteId      Int      @map("vote_id")
   candidateId Int      @map("candidate_id")
   userId      Int      @map("user_id")
-  votedAt      DateTime @map("voted_at")
+  votedAt     DateTime @map("voted_at")
 
   @@map("voting_log")
 }
