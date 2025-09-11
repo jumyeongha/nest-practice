@@ -1,10 +1,15 @@
 export class Candidate {
-  constructor(
-    private readonly _id: number,
-    private _starId: number,
-    private _name: string,
-    private _voteCount: number,
-  ) {}
+  id: number;
+  starId: number;
+  name: string;
+  voteCount: number;
+
+  constructor(id: number, starId: number, name: string, voteCount: number) {
+    this.id = id;
+    this.starId = starId;
+    this.name = name;
+    this.voteCount = voteCount;
+  }
 
   static create(
     id: number,
@@ -15,23 +20,7 @@ export class Candidate {
     return new Candidate(id, starId, name, voteCount);
   }
 
-  get id(): number {
-    return this._id;
-  }
-
-  get starId(): number {
-    return this._starId;
-  }
-
-  get name(): string {
-    return this._name;
-  }
-
-  get voteCount(): number {
-    return this._voteCount;
-  }
-
   increaseVoteCount(): void {
-    this._voteCount++;
+    this.voteCount++;
   }
 }

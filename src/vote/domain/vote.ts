@@ -1,13 +1,25 @@
 import { VoteStatus } from './vote.status';
 
 export class Vote {
+  id: null | number;
+  title: string;
+  status: VoteStatus;
+  startedAt: Date;
+  endedAt: Date;
+
   constructor(
-    private _id: null | number,
-    private _title: string,
-    private _status: VoteStatus,
-    private _startedAt: Date,
-    private _endedAt: Date,
-  ) {}
+    id: null | number,
+    title: string,
+    status: VoteStatus,
+    startedAt: Date,
+    endedAt: Date,
+  ) {
+    this.id = id;
+    this.title = title;
+    this.status = status;
+    this.startedAt = startedAt;
+    this.endedAt = endedAt;
+  }
 
   static create(
     id: null | number,
@@ -17,25 +29,5 @@ export class Vote {
     status: VoteStatus,
   ): Vote {
     return new Vote(id, title, status, startedAt, endedAt);
-  }
-
-  get id(): number | null {
-    return this._id;
-  }
-
-  get title(): string {
-    return this._title;
-  }
-
-  get startedAt(): Date {
-    return this._startedAt;
-  }
-
-  get endedAt(): Date {
-    return this._endedAt;
-  }
-
-  get status(): VoteStatus {
-    return this._status;
   }
 }
