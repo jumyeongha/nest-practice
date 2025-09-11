@@ -1,10 +1,12 @@
 import { Candidate } from '../domain/candidate';
-import { PrismaService } from '../../infra/db/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CandidateEntity, StarEntity } from '@prisma/client';
+import { PrismaService } from '../../infra/db/prisma/prisma.service';
 
 @Injectable()
 export class CandidateRepository {
+  private readonly DEFAULT_VOTE_COUNT: number = 0;
+
   constructor(private readonly prisma: PrismaService) {}
 
   async findManyByVoteId(voteId: number): Promise<Candidate[]> {
@@ -98,5 +100,15 @@ export class CandidateRepository {
     return candidateWithStar.map((c) =>
       Candidate.create(c.id, c.starId, c.starEntity.name, c.voteCount),
     );
+  }
+
+  async save(voteId: number, starId: number): Promise<void> {
+    await this.prisma.candidateEntity.create({
+      data: {
+        voteId: voteId,
+        voteCount: this.DEFAULT_VOTE_COUNT,
+        starEntity: { connect: { id: starId } },
+      },
+    });
   }
 }

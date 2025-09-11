@@ -40,8 +40,6 @@ model CandidateEntity {
   voteId    Int      @map("vote_id")
   starId    Int      @map("star_id")
   voteCount Int      @map("vote_count")
-  startedAt DateTime @map("started_at")
-  endedAt   DateTime @map("ended_at")
 
   starEntity StarEntity @relation(fields: [starId], references: [id])
 

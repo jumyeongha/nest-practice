@@ -13,4 +13,8 @@ export class CandidateService {
   async search(voteId: number, keyword: string): Promise<Candidate[]> {
     return await this.candidateRepository.search(voteId, keyword);
   }
+
+  async register(voteId: number, starId: number): Promise<void> {
+    await this.candidateRepository.save(voteId, starId);
+  }
 }

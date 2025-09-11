@@ -1,4 +1,12 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CandidateService } from '../candidate.service';
 import { Candidate } from '../domain/candidate';
 import {
@@ -9,6 +17,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CandidateListResponse } from './response/candidate.list.response';
+import { CandidateCreateRequest } from './request/candidate.create.request';
 
 @ApiTags('[투표 후보자]')
 @Controller('api/votes')
@@ -60,5 +69,22 @@ export class CandidateController {
       keyword,
     );
     return CandidateListResponse.from(candidates);
+  }
+
+  @ApiOperation({
+    summary: '후보자를 등록합니다.',
+    description: '투표 ID와 스타 ID로 투표 후보자 목록를 등록합니다.',
+  })
+  @ApiParam({ name: 'voteId', type: Number, description: '투표 ID' })
+  @ApiResponse({
+    status: 200,
+    description: '투표 후보자 목록 검색 성공',
+  })
+  @Post(':voteId/candidates')
+  register(
+    @Body() request: CandidateCreateRequest,
+    @Param('voteId', ParseIntPipe) voteId: number,
+  ): Promise<void> {
+    return this.candidateService.register(voteId, request.starId);
   }
 }
