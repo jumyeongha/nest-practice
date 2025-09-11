@@ -9,9 +9,10 @@ import { CandidateService } from './candidate.service';
 import { CandidateRepository } from './repository/candidate.repository';
 import { VotingLogService } from './voting.log.service';
 import { VotingLogRepository } from './repository/voting.log.repository';
+import { StarModule } from '../star/star.module';
 
 @Module({
-  imports: [PersistentModule],
+  imports: [PersistentModule, StarModule],
   controllers: [VoteController, CandidateController, VotingLogController],
   providers: [
     VoteService,

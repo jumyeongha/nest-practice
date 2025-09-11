@@ -9,41 +9,10 @@ export class CandidateRepository {
 
   constructor(private readonly prisma: PrismaService) {}
 
-  async findManyByVoteId(voteId: number): Promise<Candidate[]> {
-    const candidateEntities: CandidateEntity[] =
-      await this.prisma.candidateEntity.findMany({
-        where: { voteId: voteId },
-      });
-
-    const starIds: number[] = candidateEntities.map(
-      (candidateEntity) => candidateEntity.starId,
-    );
-
-    const statEntities: StarEntity[] = await this.prisma.starEntity.findMany({
-      where: {
-        id: {
-          in: starIds,
-        },
-      },
+  findManyByVoteId(voteId: number): Promise<CandidateEntity[]> {
+    return this.prisma.candidateEntity.findMany({
+      where: { voteId: voteId },
     });
-
-    const starMap = new Map<number, StarEntity>(
-      statEntities.map((s) => [s.id, s] as [number, StarEntity]),
-    );
-
-    return candidateEntities
-      .map((e) => {
-        const starEntity = starMap.get(e.starId);
-        if (starEntity) {
-          return Candidate.create(
-            e.id,
-            starEntity.id,
-            starEntity.name,
-            e.voteCount,
-          );
-        }
-      })
-      .filter((v): v is Candidate => v !== undefined);
   }
 
   async findOneById(id: number): Promise<Candidate | null> {

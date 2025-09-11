@@ -8,5 +8,6 @@ import { StarRepository } from './star.repository';
   imports: [PersistentModule],
   controllers: [StarController],
   providers: [StarService, StarRepository],
+  exports: [StarRepository],
 })
 export class StarModule {}
