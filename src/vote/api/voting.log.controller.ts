@@ -2,6 +2,7 @@ import { Body, Controller, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { VotingLogService } from '../voting.log.service';
 import { VotingLogCreateRequest } from './request/voting.log.create.request';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { VotingLog } from '../domain/voting.log';
 
 @ApiTags('[투표 기록]')
 @Controller('api')
@@ -35,7 +36,11 @@ export class VotingLogController {
     @Param('voteId', ParseIntPipe) voteId: number,
     @Param('candidateId', ParseIntPipe) candidateId: number,
     @Body() request: VotingLogCreateRequest,
-  ): Promise<void> {
-    await this.votingLogService.vote(request.userId, voteId, candidateId);
+  ): Promise<VotingLog> {
+    return await this.votingLogService.vote(
+      request.userId,
+      voteId,
+      candidateId,
+    );
   }
 }
