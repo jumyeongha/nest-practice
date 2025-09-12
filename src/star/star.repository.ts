@@ -17,12 +17,4 @@ export class StarRepository {
   findMany(): Promise<StarEntity[]> {
     return this.prisma.starEntity.findMany();
   }
-
-  findManyByIds(ids: number[]): Promise<StarEntity[]> {
-    return this.prisma.starEntity.findMany({
-      where: {
-        id: { in: ids },
-      },
-    });
-  }
 }
