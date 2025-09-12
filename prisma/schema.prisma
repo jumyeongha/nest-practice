@@ -13,6 +13,8 @@ model UserEntity {
   password String @db.VarChar(255)
   name     String @db.VarChar(255)
 
+  votingLogEntities VotingLogEntity[]
+
   @@map("user")
 }
 
@@ -32,6 +34,9 @@ model VoteEntity {
   startedAt DateTime @map("started_at")
   endedAt   DateTime @map("ended_at")
 
+  candidateEntities CandidateEntity[]
+  votingLogEntities VotingLogEntity[]
+
   @@map("vote")
 }
 
@@ -42,6 +47,9 @@ model CandidateEntity {
   voteCount Int      @map("vote_count")
 
   starEntity StarEntity @relation(fields: [starId], references: [id])
+  voteEntity VoteEntity @relation(fields: [voteId], references: [id])
+
+  votingLogEntities VotingLogEntity[]
 
   @@map("candidate")
 }
@@ -52,6 +60,10 @@ model VotingLogEntity {
   candidateId Int      @map("candidate_id")
   userId      Int      @map("user_id")
   votedAt     DateTime @map("voted_at")
+
+  candidateEntity CandidateEntity @relation(fields: [candidateId], references: [id])
+  voteEntity VoteEntity @relation(fields: [voteId], references: [id])
+  userEntity UserEntity @relation(fields: [userId], references: [id])
 
   @@map("voting_log")
 }
