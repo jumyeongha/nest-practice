@@ -1,14 +1,14 @@
 import { VoteStatus } from './vote.status';
 
 export class Vote {
-  id: null | number;
+  id: number;
   title: string;
   status: VoteStatus;
   startedAt: Date;
   endedAt: Date;
 
   constructor(
-    id: null | number,
+    id: number,
     title: string,
     status: VoteStatus,
     startedAt: Date,
@@ -22,7 +22,7 @@ export class Vote {
   }
 
   static create(
-    id: null | number,
+    id: number,
     title: string,
     startedAt: Date,
     endedAt: Date,
