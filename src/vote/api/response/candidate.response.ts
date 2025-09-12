@@ -1,4 +1,4 @@
-import { Candidate } from '../../domain/candidate';
+import { CandidateWithStarName } from '../../domain/candidate';
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
 
 @ApiSchema({
@@ -25,12 +25,12 @@ export class CandidateResponse {
     this.voteCount = voteCount;
   }
 
-  static from(candidate: Candidate): CandidateResponse {
+  static from(candidateWithStarName: CandidateWithStarName): CandidateResponse {
     return new CandidateResponse(
-      candidate.id,
-      candidate.starId,
-      candidate.name,
-      candidate.voteCount,
+      candidateWithStarName.id,
+      candidateWithStarName.starId,
+      candidateWithStarName.starEntity.name,
+      candidateWithStarName.voteCount,
     );
   }
 }

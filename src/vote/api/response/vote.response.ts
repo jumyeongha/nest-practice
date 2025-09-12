@@ -1,6 +1,7 @@
 import { Vote } from '../../domain/vote';
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
-import { VoteStatus } from '../../domain/vote.status';
+import { toVoteStatus, VoteStatus } from '../../domain/vote.status';
+import { VoteEntity } from '@prisma/client';
 
 @ApiSchema({
   name: '[투표 상세 조회 응답 DTO]',
@@ -50,6 +51,16 @@ export class VoteResponse {
       vote.id,
       vote.title,
       vote.status,
+      vote.startedAt,
+      vote.endedAt,
+    );
+  }
+
+  static fromEntity(vote: VoteEntity): VoteResponse {
+    return new VoteResponse(
+      vote.id,
+      vote.title,
+      toVoteStatus(vote.status),
       vote.startedAt,
       vote.endedAt,
     );

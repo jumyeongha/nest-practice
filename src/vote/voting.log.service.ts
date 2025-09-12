@@ -4,7 +4,7 @@ import { VotingLog } from './domain/voting.log';
 import { Vote } from './domain/vote';
 import { VoteRepository } from './repository/vote.repository';
 import { CandidateRepository } from './repository/candidate.repository';
-import { Candidate } from './domain/candidate';
+import { CandidateWithStarName } from './domain/candidate';
 
 @Injectable()
 export class VotingLogService {
@@ -27,26 +27,23 @@ export class VotingLogService {
     }
 
     //후보자 존재 유무 확인
-    const candidate: Candidate | null =
+    const candidateWithStarName: CandidateWithStarName | null =
       await this.candidateRepository.findOneById(candidateId);
 
-    if (!candidate) {
+    if (!candidateWithStarName) {
       throw new NotFoundException('후보자가 존재하지 않습니다.');
     }
 
     //투표
-    const votingLog: VotingLog = VotingLog.create(
-      null,
+    const now: Date = new Date();
+    const savedVotingLog: VotingLog = await this.votingLogRepository.save({
       voteId,
       candidateId,
       userId,
-      new Date(),
-    );
-    candidate.increaseVoteCount();
-    const savedVotingLog: VotingLog =
-      await this.votingLogRepository.save(votingLog);
+      now,
+    });
 
-    await this.candidateRepository.updateVoteCount(candidate);
+    await this.candidateRepository.updateVoteCount(candidateWithStarName.id);
 
     return savedVotingLog;
   }

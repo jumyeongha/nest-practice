@@ -3,6 +3,9 @@ import { Vote } from './domain/vote';
 import { VoteRepository } from './repository/vote.repository';
 import { VoteStatus } from './domain/vote.status';
 import { PageResult } from '../common/page.result';
+import { VoteCreateRequest } from './api/request/vote.create.request';
+import { VoteResponse } from './api/response/vote.response';
+import { VoteEntity } from '@prisma/client';
 
 @Injectable()
 export class VoteService {
@@ -24,5 +27,10 @@ export class VoteService {
     staus: VoteStatus,
   ): Promise<PageResult<Vote>> {
     return await this.voteRepository.findManyBy(page, size, staus);
+  }
+
+  async register(request: VoteCreateRequest): Promise<VoteResponse> {
+    const vote: VoteEntity = await this.voteRepository.save(request);
+    return VoteResponse.fromEntity(vote);
   }
 }
