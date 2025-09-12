@@ -1,5 +1,5 @@
 import { ApiProperty, ApiSchema } from '@nestjs/swagger';
-import { Candidate } from '../../domain/candidate';
+import { CandidateWithStarName } from '../../domain/candidate';
 import { CandidateResponse } from './candidate.response';
 
 @ApiSchema({
@@ -18,8 +18,10 @@ export class CandidateListResponse {
     this.candidates = candidates;
   }
 
-  static from(candidates: Candidate[]): CandidateListResponse {
-    const list: CandidateResponse[] = candidates.map((c) =>
+  static from(
+    candidateWithStarNames: CandidateWithStarName[],
+  ): CandidateListResponse {
+    const list: CandidateResponse[] = candidateWithStarNames.map((c) =>
       CandidateResponse.from(c),
     );
 

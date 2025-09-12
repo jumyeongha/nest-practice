@@ -22,7 +22,6 @@ import { VoteListRequest } from './request/vote.list.request';
 import { PageResult } from '../../common/page.result';
 import { PageResponse } from '../../common/page.response';
 import { VoteCreateRequest } from './request/vote.create.request';
-import { UserResponse } from '../../user/dto/user.response';
 
 @ApiTags('[투표]')
 @Controller('/api/votes')

@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { CandidateService } from '../candidate.service';
-import { Candidate } from '../domain/candidate';
+import { CandidateWithStarName } from '../domain/candidate';
 import {
   ApiOperation,
   ApiParam,
@@ -38,9 +38,9 @@ export class CandidateController {
   async getCandidates(
     @Param('voteId', ParseIntPipe) voteId: number,
   ): Promise<CandidateListResponse> {
-    const candidates: Candidate[] =
+    const candidateWithStarNames: CandidateWithStarName[] =
       await this.candidateService.getCandidates(voteId);
-    return CandidateListResponse.from(candidates);
+    return CandidateListResponse.from(candidateWithStarNames);
   }
 
   @ApiOperation({
@@ -64,11 +64,9 @@ export class CandidateController {
     @Param('voteId', ParseIntPipe) voteId: number,
     @Query('q') keyword: string,
   ): Promise<CandidateListResponse> {
-    const candidates: Candidate[] = await this.candidateService.search(
-      voteId,
-      keyword,
-    );
-    return CandidateListResponse.from(candidates);
+    const candidateWithStarNames: CandidateWithStarName[] =
+      await this.candidateService.search(voteId, keyword);
+    return CandidateListResponse.from(candidateWithStarNames);
   }
 
   @ApiOperation({
