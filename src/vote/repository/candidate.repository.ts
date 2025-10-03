@@ -37,7 +37,7 @@ export class CandidateRepository {
     });
   }
 
-  search(voteId: number, keyword: string): Promise<CandidateWithStarName[]> {
+  search(voteId: number, keyword?: string): Promise<CandidateWithStarName[]> {
     return this.prisma.candidateEntity.findMany({
       where: {
         voteId: voteId,

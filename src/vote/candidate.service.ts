@@ -12,7 +12,7 @@ export class CandidateService {
 
   async search(
     voteId: number,
-    keyword: string,
+    keyword?: string,
   ): Promise<CandidateWithStarName[]> {
     return await this.candidateRepository.search(voteId, keyword);
   }

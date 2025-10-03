@@ -50,8 +50,8 @@ export class CandidateController {
   @ApiParam({ name: 'voteId', type: Number, description: '투표 ID' })
   @ApiQuery({
     name: 'q',
-    required: true,
     type: String,
+    required: false,
     description: '검색어',
   })
   @ApiResponse({
@@ -62,7 +62,7 @@ export class CandidateController {
   @Get(':voteId/candidates/search')
   async search(
     @Param('voteId', ParseIntPipe) voteId: number,
-    @Query('q') keyword: string,
+    @Query('q') keyword?: string,
   ): Promise<CandidateListResponse> {
     const candidateWithStarNames: CandidateWithStarName[] =
       await this.candidateService.search(voteId, keyword);
