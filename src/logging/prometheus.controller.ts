@@ -9,7 +9,7 @@ export class PrometheusController {
   @Get()
   async getMetrics(@Res() res: Response): Promise<void> {
     const metrics = await this.prometheusService.getMetrics();
-    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Type:', 'text/plain');
     res.send(metrics);
   }
 }
