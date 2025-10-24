@@ -10,7 +10,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiOperation({
-    summary: '유저 등록',
+    summary: '유저 등록f2f2f2f2f2',
     description: '유저를 등록합니다.',
   })
   @ApiResponse({
