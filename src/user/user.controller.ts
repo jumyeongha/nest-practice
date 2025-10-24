@@ -11,7 +11,7 @@ export class UserController {
 
   @ApiOperation({
     summary: '유저 등록f2f2f2f2f2',
-    description: '유저를 등록합니다.',
+    description: '유저를 등록합니다.f3f3f3',
   })
   @ApiResponse({
     status: 200,
