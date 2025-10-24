@@ -5,7 +5,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[유저]')
-@Controller('api/usersf1f1f1f1f1')
+@Controller('api/usersff2f2f2f2f2f1f1f1f1f1')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -15,7 +15,7 @@ export class UserController {
   })
   @ApiResponse({
     status: 200,
-    description: '유저 등록 성공f1f1f1f1',
+    description: '유저 f2f2f2등록 성공f1ff2f2f2f2f21f1f1',
     type: UserResponse,
   })
   @Post()
