@@ -15,7 +15,7 @@ export class UserController {
   })
   @ApiResponse({
     status: 200,
-    description: '유저 등록 성공',
+    description: '유저 등록 성공f1f1f1f1',
     type: UserResponse,
   })
   @Post()
