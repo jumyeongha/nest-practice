@@ -1,4 +1,12 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { VoteService } from '../vote.service';
 import { VoteResponse } from './response/vote.response';
 import { Vote } from '../domain/vote';
@@ -13,6 +21,7 @@ import {
 import { VoteListRequest } from './request/vote.list.request';
 import { PageResult } from '../../common/page.result';
 import { PageResponse } from '../../common/page.response';
+import { VoteCreateRequest } from './request/vote.create.request';
 
 @ApiTags('[투표]')
 @Controller('/api/votes')
@@ -69,5 +78,19 @@ export class VoteController {
     return PageResponse.convert<Vote, VoteResponse>(votes, (v) =>
       VoteResponse.from(v),
     );
+  }
+
+  @ApiOperation({
+    summary: '투표 등록',
+    description: '투표를 등록합니다.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '투표 등록 성공',
+    type: VoteResponse,
+  })
+  @Post()
+  register(@Body() request: VoteCreateRequest): Promise<VoteResponse> {
+    return this.voteService.register(request);
   }
 }

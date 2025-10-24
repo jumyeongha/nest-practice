@@ -1,10 +1,15 @@
 export class PageResult<T> {
-  constructor(
-    private readonly _data: T[],
-    private readonly _currentPage: number,
-    private readonly _size: number,
-    private readonly _total: number,
-  ) {}
+  readonly data: T[];
+  readonly currentPage: number;
+  readonly size: number;
+  readonly total: number;
+
+  constructor(data: T[], currentPage: number, size: number, total: number) {
+    this.data = data;
+    this.currentPage = currentPage;
+    this.size = size;
+    this.total = total;
+  }
 
   static of<T>(
     data: T[],
@@ -13,21 +18,5 @@ export class PageResult<T> {
     total: number,
   ): PageResult<T> {
     return new PageResult(data, currentPage, size, total);
-  }
-
-  get data(): T[] {
-    return this._data;
-  }
-
-  get currentPage(): number {
-    return this._currentPage;
-  }
-
-  get size(): number {
-    return this._size;
-  }
-
-  get total(): number {
-    return this._total;
   }
 }
